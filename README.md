@@ -71,11 +71,12 @@ This project is part of the **Kubernetes Module** from the **TWN DevOps Bootcamp
 ### Creating Deployment & Service for Each Microservice
 
 1. Create a namespace named microservices to group all microservices in the cluster.
-2. Apply the YAML file in the microservice namespace.
-3. Verify that all pods are running.
-4. Verify all the services created.
-5. Obtain the external IP of your node to access the boutique.
-6. Navigate to DigitalOcean and allow incoming internet traffic.
+2. Create the deployment and service YAML file for each microservice.
+3. Apply the YAML file in the microservice namespace.
+4. Verify that all pods are running.
+5. Verify all the services created.
+6. Obtain the external IP of your node to access the boutique.
+7. Navigate to DigitalOcean and allow incoming internet traffic.
 
 ### Apply K8 and Security Best Practices
 1. Use a fixed image version to ensure consistency across environments.
