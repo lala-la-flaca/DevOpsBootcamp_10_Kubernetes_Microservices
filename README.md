@@ -85,10 +85,10 @@ This project is part of the **Kubernetes Module** from the **TWN DevOps Bootcamp
 5. Set periodSeconds to specify how often to check container health.
 6. Add a readinessProbe to each microservice to verify when the container is ready to receive traffic.
 7. Define the protocol, port, and periodSeconds for the readinessProbe.
-8. For Redis, change the probe protocol from gRPC to TCPSocket.
-9. For frontend microservice, change the gRPC probe to httpGet and specify the HTTP path.
+8. For Redis, change the probe protocol from gRPC to TCPSocket. Kubelet attempts to open a socket to the container using the application port.
+9. For the frontend microservice, change the gRPC probe to httpGet and specify the HTTP path. Kubelet sends an HTTP request to the specified path and port. To check the HTTP endpoint.
 10. Define resource requests and limits for each microservice to manage expected and maximum resource usage.
-11. Change the frontend service type from NodePort to LoadBalancer. NodePort exposes all nodes, while LoadBalancer provides a single entry point.
+11. Change the frontend service type from NodePort to LoadBalancer. NodePort exposes all worker nodes, while LoadBalancer provides a single entry point from the Cloud Provider. Exposing all worker nodes increases the security risks. 
 12. Set the number of replicas for each deployment.
 13. Use labels consistently to identify and manage deployments.
       
