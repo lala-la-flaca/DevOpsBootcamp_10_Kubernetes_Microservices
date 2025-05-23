@@ -8,6 +8,7 @@ This project is part of the **Kubernetes Module** from the **TWN DevOps Bootcamp
 - **DigitalOcean**: Cloud-managed K8s.
 - **Linux**: Environment for CLI.
 - **YAML**: Resource definitions.
+- **kubectl**: CLI
   
 ## 📋 Prerequisites
 - Ensure minikube is running.
@@ -31,7 +32,7 @@ This project is part of the **Kubernetes Module** from the **TWN DevOps Bootcamp
    [Online Boutique](https://github.com/GoogleCloudPlatform/microservices-demo)
 2. Download the YAML example
 
-### Setting Up Kubernetes Cluster Using DigitalOcean K8 Engine
+### Setting Up a Kubernetes Cluster Using DigitalOcean K8 Engine
 1. Sign in to DigitalOcean and create a Kubernetes cluster.
 
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_DO_MongoDB/blob/main/Img/1%20creating%20k8%20digitalocean.png" width=800 />
