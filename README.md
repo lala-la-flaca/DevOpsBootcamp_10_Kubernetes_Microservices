@@ -73,7 +73,7 @@ This project is part of the **Kubernetes Module** from the **TWN DevOps Bootcamp
 1. Create a namespace named microservices to group all microservices in the cluster.
 
    ```bash
-   
+   kubectl create namespace microservices
    ```
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/12%20creatng%20microservices%20namespace.png" width=500 />
    
@@ -99,13 +99,17 @@ This project is part of the **Kubernetes Module** from the **TWN DevOps Bootcamp
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/15%20checking%20services.png" width=500 />
    
 10. Obtain the external IP of your node to access the boutique.
+    
     ```bash
     kubectl get nodes -o wide
     ```
     <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/16%20getting%20external%20ip%20address.PNG" width=500 />
     
 12. Navigate to DigitalOcean and modify the firewall to allow incoming internet traffic.
-13. Check the public IP address using port 30007
+
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/18%20add%20an%20inbound%20rule%20allowing%20traffic%20from%20internet.png" width=500 />
+    
+14. Check the public IP address using port 30007
     
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/17%20online%20boutique%20up.PNG" width=500 />
    
@@ -120,10 +124,14 @@ This project is part of the **Kubernetes Module** from the **TWN DevOps Bootcamp
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/101%20livenessProbe.png" width=500 />
    
 5. Specify the protocol for the livenessProbe. Use gRPC (developed by Google) in this case.
-6. Specify the port for the livenessProbe.
-7. Set periodSeconds to specify how often to check container health.   
-9. Add a readinessProbe to each microservice to verify when the container is ready to receive traffic.
-10. Define the protocol, port, and periodSeconds for the readinessProbe.
+   
+7. Specify the port for the livenessProbe.
+   
+9. Set periodSeconds to specify how often to check container health.
+   
+11. Add a readinessProbe to each microservice to verify when the container is ready to receive traffic.
+    
+13. Define the protocol, port, and periodSeconds for the readinessProbe.
     
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/102%20readinessProbe.png" width=500 />
    
