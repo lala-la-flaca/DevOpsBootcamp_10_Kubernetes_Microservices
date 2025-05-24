@@ -39,11 +39,11 @@ This project is part of the **Kubernetes Module** from the **TWN DevOps Bootcamp
    
 2. Configure the cluster by specifying the node pool name, data center region, cluster capacity, and adding three nodes.
    
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/4%20create%20k8%20in%20DO.png" width=800 />
    
 3. Download the cluster configuration file in the Overview section of the cluster configuration.
    
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/5%20download%20k8%20config%20file.PNG" width=800 />
    
 4. Update the file permissions to read-only.
 
@@ -51,7 +51,7 @@ This project is part of the **Kubernetes Module** from the **TWN DevOps Bootcamp
    chmod 400 k8s-1-32-2-do-1-nyc1-1747874609416-kubeconfig.yaml
    ```
    
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/6%20setting%20permisson%20config%20file.png" width=800 />
    
 5. Set the KUBECONFIG environment variable to the path of the configuration file.
     
@@ -59,14 +59,14 @@ This project is part of the **Kubernetes Module** from the **TWN DevOps Bootcamp
    export KUBECONFIG=k8s-1-32-2-do-1-nyc1-1747874609416-kubeconfig.yaml  
    ```
    
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/9%20configuring%20the%20micronservice%20config%20file.PNG" width=800 />
    
 6. Verify that the nodes are active
 
     ```bash
     kubectl get node
     ```
-    <img src="" width=800 />
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/10%20get%20node.PNG" width=800 />
 
 ### Creating Deployment & Service for Each Microservice
 
@@ -75,7 +75,7 @@ This project is part of the **Kubernetes Module** from the **TWN DevOps Bootcamp
    ```bash
    
    ```
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/12%20creatng%20microservices%20namespace.png" width=800 />
    
 3. Create the deployment and service YAML file for each microservice.
 4. Apply the YAML file in the microservice namespace.
@@ -83,74 +83,72 @@ This project is part of the **Kubernetes Module** from the **TWN DevOps Bootcamp
    ```bash
    kubectl apply -f config.yaml -n microservices
    ```
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/13%20apply%20the%20config%20file%20with%20deployent%20and%20services%20in%20the%20namespace.png" width=800 />
 6. Verify that all pods are running.
 
    ```bash
    kubectl get pod -n microservices
    ```
-   <img src="" width=800/>
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/14%20pods%20running%20in%20the%20microservice%20ns.png" width=800/>
    
 8. Verify all the services were created.
 
    ```bash
    kubectl get services -n microservices
    ```
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/15%20checking%20services.png" width=800 />
    
 10. Obtain the external IP of your node to access the boutique.
     ```bash
     kubectl get nodes -o wide
     ```
-    <img src="" width=800 />
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/16%20getting%20external%20ip%20address.PNG" width=800 />
     
 12. Navigate to DigitalOcean and modify the firewall to allow incoming internet traffic.
+13. Check the public IP address using port 30007
     
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/17%20online%20boutique%20up.PNG" width=800 />
    
 
 ### Apply K8 and Security Best Practices
 1. Use a fixed image version to ensure consistency across environments.
 
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/100%20pinned%20image.png" width=800 />
    
 3. Add a livenessProbe to each microservice to monitor container health.
    
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/101%20livenessProbe.png" width=800 />
    
 5. Specify the protocol for the livenessProbe. Use gRPC (developed by Google) in this case.
 6. Specify the port for the livenessProbe.
-7. Set periodSeconds to specify how often to check container health.
-   
-   <img src="" width=800 />
-   
+7. Set periodSeconds to specify how often to check container health.   
 9. Add a readinessProbe to each microservice to verify when the container is ready to receive traffic.
 10. Define the protocol, port, and periodSeconds for the readinessProbe.
     
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/102%20readinessProbe.png" width=800 />
    
 12. For Redis, change the probe protocol from gRPC to TCPSocket. Kubelet attempts to open a socket to the container using the application port.
     
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/103%20tcpsocket.png" width=800 />
    
 14. For the frontend microservice, change the gRPC probe to httpGet and specify the HTTP path. Kubelet sends an HTTP request to the specified path and port. To check the HTTP endpoint.
     
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/104%20httpget%20bcs%20endpoint%20checking%20the%20http%20endpoint.png" width=800 />
    
 16. Define resource requests and limits for each microservice to manage expected and maximum resource usage.
     
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/105%20adding%20expteced%20resources%20needed.png" width=800 />
    
 18. Change the frontend service type from NodePort to LoadBalancer. NodePort exposes all worker nodes, while LoadBalancer provides a single entry point from the Cloud Provider. Exposing all worker nodes increases the security risks.
     
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/108%20using%20loadbalancer%20as%20a%20netry%20point%20and%20no%20nodeport.png" width=800 />
    
 20. Set the number of replicas for each deployment.
     
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/109%20setting%20replicas%20high%20availability.png" width=800 />
    
 22. Use labels consistently to identify and manage deployments.
     
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/110%20labels.png" width=800 />
    
       
