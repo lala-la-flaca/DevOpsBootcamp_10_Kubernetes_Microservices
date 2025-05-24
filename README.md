@@ -77,39 +77,39 @@ This project is part of the **Kubernetes Module** from the **TWN DevOps Bootcamp
    ```
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/12%20creatng%20microservices%20namespace.png" width=500 />
    
-3. Create the deployment and service YAML file for each microservice.
-4. Apply the YAML file in the microservice namespace.
+2. Create the deployment and service YAML file for each microservice.
+3. Apply the YAML file in the microservice namespace.
 
    ```bash
    kubectl apply -f config.yaml -n microservices
    ```
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/13%20apply%20the%20config%20file%20with%20deployent%20and%20services%20in%20the%20namespace.png" width=500 />
-6. Verify that all pods are running.
+4. Verify that all pods are running.
 
    ```bash
    kubectl get pod -n microservices
    ```
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/14%20pods%20running%20in%20the%20microservice%20ns.png" width=500/>
    
-8. Verify all the services were created.
+5. Verify all the services were created.
 
    ```bash
    kubectl get services -n microservices
    ```
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/15%20checking%20services.png" width=500 />
    
-10. Obtain the external IP of your node to access the boutique.
+6. Obtain the external IP of your node to access the boutique.
     
     ```bash
     kubectl get nodes -o wide
     ```
     <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/16%20getting%20external%20ip%20address.PNG" width=500 />
     
-12. Navigate to DigitalOcean and modify the firewall to allow incoming internet traffic.
+7. Navigate to DigitalOcean and modify the firewall to allow incoming internet traffic.
 
     <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/18%20add%20an%20inbound%20rule%20allowing%20traffic%20from%20internet.png" width=500 />
     
-14. Check the public IP address using port 30007
+8. Check the public IP address using port 30007
     
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/17%20online%20boutique%20up.PNG" width=500 />
    
@@ -119,43 +119,43 @@ This project is part of the **Kubernetes Module** from the **TWN DevOps Bootcamp
 
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/100%20pinned%20image.png" width=500 />
    
-3. Add a livenessProbe to each microservice to monitor container health.
+2. Add a livenessProbe to each microservice to monitor container health.
    
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/101%20livenessProbe.png" width=500 />
    
-5. Specify the protocol for the livenessProbe. Use gRPC (developed by Google) in this case.
+3. Specify the protocol for the livenessProbe. Use gRPC (developed by Google) in this case.
    
-7. Specify the port for the livenessProbe.
+4. Specify the port for the livenessProbe.
    
-9. Set periodSeconds to specify how often to check container health.
+5. Set periodSeconds to specify how often to check container health.
    
-11. Add a readinessProbe to each microservice to verify when the container is ready to receive traffic.
+6. Add a readinessProbe to each microservice to verify when the container is ready to receive traffic.
     
-13. Define the protocol, port, and periodSeconds for the readinessProbe.
+7. Define the protocol, port, and periodSeconds for the readinessProbe.
     
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/102%20readinessProbe.png" width=500 />
    
-12. For Redis, change the probe protocol from gRPC to TCPSocket. Kubelet attempts to open a socket to the container using the application port.
+8. For Redis, change the probe protocol from gRPC to TCPSocket. Kubelet attempts to open a socket to the container using the application port.
     
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/103%20tcpsocket.png" width=500 />
    
-14. For the frontend microservice, change the gRPC probe to httpGet and specify the HTTP path. Kubelet sends an HTTP request to the specified path and port. To check the HTTP endpoint.
+9. For the frontend microservice, change the gRPC probe to httpGet and specify the HTTP path. Kubelet sends an HTTP request to the specified path and port. To check the HTTP endpoint.
     
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/104%20httpget%20bcs%20endpoint%20checking%20the%20http%20endpoint.png" width=500 />
    
-16. Define resource requests and limits for each microservice to manage expected and maximum resource usage.
+10. Define resource requests and limits for each microservice to manage expected and maximum resource usage.
     
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/105%20adding%20expteced%20resources%20needed.png" width=500 />
    
-18. Change the frontend service type from NodePort to LoadBalancer. NodePort exposes all worker nodes, while LoadBalancer provides a single entry point from the Cloud Provider. Exposing all worker nodes increases the security risks.
+11. Change the frontend service type from NodePort to LoadBalancer. NodePort exposes all worker nodes, while LoadBalancer provides a single entry point from the Cloud Provider. Exposing all worker nodes increases the security risks.
     
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/108%20using%20loadbalancer%20as%20a%20netry%20point%20and%20no%20nodeport.png" width=500 />
    
-20. Set the number of replicas for each deployment.
+12. Set the number of replicas for each deployment.
     
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/109%20setting%20replicas%20high%20availability.png" width=500 />
    
-22. Use labels consistently to identify and manage deployments.
+13. Use labels consistently to identify and manage deployments.
     
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_10_Kubernetes_Microservices/blob/main/Img/110%20labels.png" width=500 />
    
